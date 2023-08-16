@@ -1,16 +1,31 @@
-name: workflow-with-container
+name: JAVA CI
 on: push
 env:
   docker_username: ${{ github.actor }}
   docker_password: ${{ secrets.GITHUB_TOKEN }}
   GIT_COMMIT: ${{ github.sha }}
 jobs:
+  Clone-down:
+    runs-on: ubuntu-latest
+    container: gradle:6-jdk11
+    steps:
+    - name: Clone-down
+      uses: actions/checkout@v3
+    - name: Upload Repo
+      uses: actions/upload-artifact@v3
+      with:
+        name: code
+        path: .
   Build:
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
-    steps:    
-      - name: Clone-down
-        uses: actions/checkout@v3
+    needs: Clone-down
+    steps:  
+      - name: Download code
+        uses: actions/download-artifact@v3
+        with:
+          name: code
+          path: .  
       - name: "Build application"
         run: chmod +x ci/build-app.sh && ci/build-app.sh
       - name: "Unit test"
