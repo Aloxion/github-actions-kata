@@ -11,3 +11,8 @@ jobs:
         run: chmod +x ci/build-app.sh && ci/build-app.sh
       - name: "Unit test"
         run: ci/unit-test-app.sh
+      - name: Upload a repository
+        uses: actions/upload-artifact@v3
+        with:
+          name: repo-artifact
+          path: .
