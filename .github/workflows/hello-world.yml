@@ -1,4 +1,4 @@
-name: JAVA CI
+name: JAVA CI 2
 on: 
   pull_request:
     types: [opened, reopened]
