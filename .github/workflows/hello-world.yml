@@ -1,5 +1,8 @@
 name: JAVA CI
-on: push
+on: 
+  pull_request:
+    types: [opened, reopened]
+  push:
 env:
   docker_username: ${{ github.actor }}
   docker_password: ${{ secrets.GITHUB_TOKEN }}
