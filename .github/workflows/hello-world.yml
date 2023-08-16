@@ -3,6 +3,8 @@ on:
   pull_request:
     types: [opened, reopened]
   push:
+    branches:
+      - main
 env:
   docker_username: ${{ github.actor }}
   docker_password: ${{ secrets.GITHUB_TOKEN }}
